@@ -16,11 +16,12 @@
         }
 
         :root {
-            /* Colori pastello intensificati per far risaltare il bianco */
+            /* Sfondi pastello per lo schermo intero */
             --blue: #a2d2ff;
             --pink: #ffc8dd;
-            --blue-dark: #74b9ff;
-            --pink-dark: #ffafcc;
+            /* Colori molto più intensi per i bottoni per far risaltare il bianco */
+            --blue-dark: #4895ef; 
+            --pink-dark: #f72585; 
         }
 
         body, html { 
@@ -82,15 +83,21 @@
             display: flex; justify-content: space-around; margin-top: 25px; width: 100%; max-width: 600px; margin-inline: auto;
         }
         .vote-card { width: 45%; }
+        
+        /* BOTTONI AGGIORNATI PER FAR RISALTARE IL BIANCO */
         .btn-voto {
             width: 100%; padding: 20px 10px; border: none; border-radius: 15px;
-            font-size: 1.3rem; font-weight: bold; color: white; cursor: pointer;
+            font-size: 1.4rem; font-weight: 900; letter-spacing: 1px;
+            color: #ffffff; /* Testo forzatamente bianco */
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Ombra per staccare il testo dallo sfondo */
+            cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); transition: all 0.2s;
         }
         .btn-voto:active { transform: scale(0.95); }
-        .btn-gabriel { background: var(--blue-dark); color: white; }
-        .btn-victoria { background: var(--pink-dark); color: white; }
-        .btn-start { background: #333; width: auto; padding: 15px 40px; }
+        .btn-gabriel { background: var(--blue-dark); }
+        .btn-victoria { background: var(--pink-dark); }
+        
+        .btn-start { background: #333; color: white; width: auto; padding: 15px 40px; text-shadow: none; font-size: 1.2rem; }
 
         /* Barre di Progresso */
         .progress-container { 
@@ -98,8 +105,8 @@
             margin-top: 15px; height: 16px; overflow: hidden; box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
         }
         .progress-bar { height: 100%; width: 50%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bar-blue { background: #4895ef; }
-        .bar-pink { background: #f72585; }
+        .bar-blue { background: var(--blue-dark); }
+        .bar-pink { background: var(--pink-dark); }
         .percent-text { font-weight: bold; color: #333; font-size: 1.2rem; margin-top: 5px; display: block; }
 
         /* Tasto Lista Nascita Amazon */
@@ -124,7 +131,7 @@
             font-size: 6.5rem; 
             color: #ffffff; 
             opacity: 0; 
-            margin-top: -250px; /* Altezza ottimizzata */
+            margin-top: -250px; 
             transition: opacity 1.5s ease-in;
             text-shadow: 2px 4px 20px rgba(0,0,0,0.4); 
             position: relative; 
@@ -270,7 +277,9 @@
             document.getElementById('content-ui').style.display = 'none';
             document.getElementById('reveal-ui').style.display = 'block';
             document.getElementById('bg-pink').style.flex = "0";
-            document.getElementById('bg-blue').style.background = "#4a90e2";
+            
+            // Colore finale più azzurro intenso che si ricollega al bottone
+            document.getElementById('bg-blue').style.background = "#4895ef";
 
             bodymovin.loadAnimation({
                 container: document.getElementById('lottie-pacco'),
