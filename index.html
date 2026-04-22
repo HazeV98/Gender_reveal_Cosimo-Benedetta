@@ -28,7 +28,7 @@
             overflow-x: hidden; 
         }
 
-        /* Sfondo Split Dinamico (Sempre visibile) */
+        /* Sfondo Split Dinamico */
         .split-bg {
             position: fixed; inset: 0; display: flex; z-index: -1;
             transition: all 1s ease-in-out;
@@ -39,32 +39,42 @@
         /* Schermata Iniziale (Effetto Vetro) */
         #welcome-overlay {
             position: fixed; inset: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.4); /* Semi-trasparente */
-            backdrop-filter: blur(10px); /* Sfocatura moderna */
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
         .welcome-box {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* Timer UI INGRANDITO */
+        /* Timer UI BIANCO e INGRANDITO */
         #timer-container {
-            margin-top: 30px; font-weight: bold; color: #222; min-height: 120px;
+            margin-top: 30px; min-height: 120px;
             display: flex; justify-content: center; align-items: center;
         }
-        .timer-big { font-size: 8rem; color: #222; line-height: 1; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .timer-normal { font-size: 2.8rem; display: flex; gap: 15px; justify-content: center; } /* Molto più grande */
+        .timer-big { 
+            font-size: 8rem; color: #ffffff; line-height: 1; font-weight: bold;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+        }
+        .timer-normal { 
+            font-size: 2.8rem; display: flex; gap: 15px; justify-content: center; 
+            color: #ffffff; text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
         .timer-normal span { font-weight: 900; }
-        .timer-normal small { font-size: 1rem; display: block; color: #555; text-transform: uppercase; font-weight: bold; }
+        .timer-normal small { 
+            font-size: 1rem; display: block; color: rgba(255, 255, 255, 0.9); 
+            text-transform: uppercase; font-weight: bold; text-shadow: none;
+        }
 
         /* Sezione Voti */
         .vote-section { padding: 15px; text-align: center; margin-top: 10px; }
         .vote-title {
-            background: rgba(255,255,255,0.9); display: inline-block; 
+            background: rgba(255,255,255,0.95); display: inline-block; 
             padding: 10px 25px; border-radius: 20px; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: bold;
         }
         
         .btns-container { 
@@ -77,20 +87,20 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
         }
         .btn-voto:active { transform: scale(0.95); }
-        .btn-voto:disabled { cursor: not-allowed; } /* Per quando hanno già votato */
+        .btn-voto:disabled { cursor: not-allowed; }
         .btn-gabriel { background: var(--blue-dark); }
         .btn-victoria { background: var(--pink-dark); }
         .btn-start { background: #333; width: auto; padding: 15px 40px; }
 
         /* Barre di Progresso */
         .progress-container { 
-            background: rgba(255,255,255,0.7); border-radius: 10px; 
+            background: rgba(255,255,255,0.8); border-radius: 10px; 
             margin-top: 15px; height: 14px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
-        .progress-bar { height: 100%; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .progress-bar { height: 100%; width: 50%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .bar-blue { background: #4a90e2; }
         .bar-pink { background: #e24a90; }
-        .percent-text { font-weight: bold; color: #444; font-size: 1.1rem; margin-top: 5px; display: block; }
+        .percent-text { font-weight: bold; color: #444; font-size: 1.1rem; margin-top: 5px; display: block; background: rgba(255,255,255,0.6); border-radius: 5px; padding: 2px;}
 
         /* Tasti Extra */
         .amazon-link {
@@ -109,23 +119,20 @@
         /* Schermata Reveal Finale */
         #reveal-ui { display: none; width: 100%; text-align: center; position: absolute; top: 10%; left: 0; right: 0; }
         
-        /* CORREZIONE NOME */
         #reveal-name {
             font-family: 'SaintOmbre', serif; 
-            font-size: 6rem; 
-            color: #ffffff; /* Bianco per risaltare sull'azzurro */
+            font-size: 6.5rem; 
+            color: #ffffff; 
             opacity: 0; 
-            margin-top: -60px; 
+            margin-top: -110px; /* Più alto rispetto al pacco */
             transition: opacity 1.5s ease-in;
-            text-shadow: 2px 4px 15px rgba(0,0,0,0.3); /* Ombra per renderlo visibile ovunque */
-            position: relative; /* Fondamentale per z-index */
-            z-index: 999; /* Lo spinge sopra l'animazione Lottie */
+            text-shadow: 2px 4px 15px rgba(0,0,0,0.3); 
+            position: relative; 
+            z-index: 999; 
             display: block;
         }
         
-        #lottie-pacco {
-            position: relative; z-index: 1; /* Tiene il pacco dietro il nome */
-        }
+        #lottie-pacco { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
@@ -192,8 +199,6 @@
         let targetTime = new Date("2026-05-02T18:00:00+02:00").getTime();
         let isRevealed = false;
 
-        // --- SISTEMA DI VOTO CON BLOCCO ---
-        // Controlla se l'utente ha già votato in precedenza
         function controllaStatoVoto() {
             if (localStorage.getItem("voto_registrato")) {
                 document.getElementById("btn-gabriel").disabled = true;
@@ -204,36 +209,45 @@
         }
 
         window.vota = async (scelta) => {
-            // Verifica Limite
             if (localStorage.getItem("voto_registrato")) {
                 alert("Hai già espresso il tuo voto! Attendi il risultato ⏳");
                 return;
             }
 
-            // Segna il voto come effettuato sul dispositivo
             localStorage.setItem("voto_registrato", "true");
             controllaStatoVoto();
 
             const btn = document.getElementById(`btn-${scelta}`);
             btn.innerText = "VOTATO ✔";
-            btn.style.opacity = "1"; // Mantiene acceso quello scelto
+            btn.style.opacity = "1";
 
-            // Invia a Firebase
             await updateDoc(doc(db, "votes", "summary"), { [scelta]: increment(1) });
         };
 
-        // --- LETTURA VOTI IN TEMPO REALE ---
+        // BUG FIX: Gestione corretta dei voti a ZERO
         onSnapshot(doc(db, "votes", "summary"), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                const total = (data.gabriel || 0) + (data.victoria || 0) || 1; 
-                const pG = Math.round(((data.gabriel || 0) / total) * 100);
-                const pV = 100 - pG;
+                const gabrielVotes = data.gabriel || 0;
+                const victoriaVotes = data.victoria || 0;
+                const total = gabrielVotes + victoriaVotes;
+                
+                let pG = 50; // Default metà e metà se nessuno ha votato
+                let pV = 50;
+                let textG = "0%";
+                let textV = "0%";
+
+                if (total > 0) {
+                    pG = Math.round((gabrielVotes / total) * 100);
+                    pV = 100 - pG;
+                    textG = pG + "%";
+                    textV = pV + "%";
+                }
                 
                 document.getElementById('bar-gabriel').style.width = pG + '%';
                 document.getElementById('bar-victoria').style.width = pV + '%';
-                document.getElementById('percent-gabriel').innerText = pG + '%';
-                document.getElementById('percent-victoria').innerText = pV + '%';
+                document.getElementById('percent-gabriel').innerText = textG;
+                document.getElementById('percent-victoria').innerText = textV;
             }
         });
 
@@ -294,7 +308,7 @@
                 autoplay: true
             });
 
-            // Mostra il nome dopo 1.5 secondi (anticipato per vederlo sbucare dal pacco)
+            // TIMING AGGIORNATO: appare dopo 2.5 secondi
             setTimeout(() => {
                 const nameTag = document.getElementById('reveal-name');
                 nameTag.style.opacity = "1";
@@ -306,13 +320,13 @@
                     colors: ['#ffffff', '#89CFF0', '#007bff'],
                     zIndex: 2000
                 });
-            }, 1500); 
+            }, 2500); 
         }
 
         // --- AVVIO APP ---
         window.startApp = async () => {
             document.getElementById('welcome-overlay').style.display = 'none';
-            controllaStatoVoto(); // Disattiva i bottoni se aveva già votato
+            controllaStatoVoto();
             
             const ref = doc(db, "votes", "summary");
             const snap = await getDoc(ref);
