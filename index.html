@@ -82,15 +82,12 @@
         }
         .vote-card { width: 45%; }
         
-        /* FIX BIANCO PURO SUI BOTTONI */
+        /* BOTTONI BIANCHI */
         .btn-voto {
             width: 100%; padding: 20px 10px; border: none; border-radius: 15px;
             font-size: 1.4rem; font-weight: 900; letter-spacing: 1px;
-            
-            /* Forzatura estrema per il testo bianco ovunque */
             color: #ffffff !important; 
             -webkit-text-fill-color: #ffffff !important; 
-            
             text-shadow: 0 2px 5px rgba(0,0,0,0.4); 
             cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); transition: all 0.2s;
@@ -100,8 +97,7 @@
         .btn-victoria { background: var(--pink-dark); }
         
         .btn-start { 
-            background: #333; 
-            width: auto; padding: 15px 40px; 
+            background: #333; width: auto; padding: 15px 40px; 
             text-shadow: none; font-size: 1.2rem; 
         }
 
@@ -213,6 +209,12 @@
         
         let targetTime = new Date("2026-05-02T18:00:00+02:00").getTime();
         let isRevealed = false;
+
+        // --- FIX RITARDATARI ---
+        // Se qualcuno apre il sito dopo il 2 Maggio ore 18:00, facciamo partire un timer di 30 secondi
+        if (new Date().getTime() >= targetTime) {
+            targetTime = new Date().getTime() + 30000;
+        }
 
         function controllaStatoVoto() {
             if (localStorage.getItem("voto_registrato")) {
