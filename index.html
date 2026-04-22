@@ -28,7 +28,7 @@
             overflow-x: hidden; 
         }
 
-        /* Sfondo Split Dinamico */
+        /* Sfondo Split Dinamico (Sempre visibile) */
         .split-bg {
             position: fixed; inset: 0; display: flex; z-index: -1;
             transition: all 1s ease-in-out;
@@ -36,78 +36,105 @@
         .bg-left { flex: 1; background: var(--blue); transition: flex 1s ease-in-out, background 1s; }
         .bg-right { flex: 1; background: var(--pink); transition: flex 1s ease-in-out; }
 
-        /* Schermata Iniziale (Necessaria per sbloccare audio/vibrazione) */
+        /* Schermata Iniziale (Effetto Vetro) */
         #welcome-overlay {
-            position: fixed; inset: 0; background: white; z-index: 100;
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.4); /* Semi-trasparente */
+            backdrop-filter: blur(10px); /* Sfocatura moderna */
+            -webkit-backdrop-filter: blur(10px);
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        /* Timer UI */
+        .welcome-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Timer UI INGRANDITO */
         #timer-container {
-            margin-top: 40px; font-weight: bold; color: #444; min-height: 100px;
+            margin-top: 30px; font-weight: bold; color: #222; min-height: 120px;
             display: flex; justify-content: center; align-items: center;
         }
-        .timer-big { font-size: 6rem; color: #333; line-height: 1; }
-        .timer-normal { font-size: 1.8rem; display: flex; gap: 12px; justify-content: center; }
+        .timer-big { font-size: 8rem; color: #222; line-height: 1; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .timer-normal { font-size: 2.8rem; display: flex; gap: 15px; justify-content: center; } /* Molto più grande */
+        .timer-normal span { font-weight: 900; }
+        .timer-normal small { font-size: 1rem; display: block; color: #555; text-transform: uppercase; font-weight: bold; }
 
         /* Sezione Voti */
-        .vote-section { padding: 20px; text-align: center; margin-top: 10px; }
+        .vote-section { padding: 15px; text-align: center; margin-top: 10px; }
         .vote-title {
-            background: rgba(255,255,255,0.8); display: inline-block; 
-            padding: 8px 20px; border-radius: 20px; color: #333;
+            background: rgba(255,255,255,0.9); display: inline-block; 
+            padding: 10px 25px; border-radius: 20px; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
         .btns-container { 
-            display: flex; justify-content: space-around; margin-top: 30px; width: 100%; max-width: 600px; margin-inline: auto;
+            display: flex; justify-content: space-around; margin-top: 25px; width: 100%; max-width: 600px; margin-inline: auto;
         }
-        .vote-card { width: 42%; }
+        .vote-card { width: 45%; }
         .btn-voto {
             width: 100%; padding: 20px 10px; border: none; border-radius: 15px;
-            font-size: 1.2rem; font-weight: bold; color: white; cursor: pointer;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: transform 0.1s;
+            font-size: 1.3rem; font-weight: bold; color: white; cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
         }
         .btn-voto:active { transform: scale(0.95); }
+        .btn-voto:disabled { cursor: not-allowed; } /* Per quando hanno già votato */
         .btn-gabriel { background: var(--blue-dark); }
         .btn-victoria { background: var(--pink-dark); }
+        .btn-start { background: #333; width: auto; padding: 15px 40px; }
 
         /* Barre di Progresso */
         .progress-container { 
-            background: rgba(255,255,255,0.6); border-radius: 10px; 
-            margin-top: 15px; height: 12px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.7); border-radius: 10px; 
+            margin-top: 15px; height: 14px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         .progress-bar { height: 100%; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .bar-blue { background: #4a90e2; }
         .bar-pink { background: #e24a90; }
-        .percent-text { font-weight: bold; color: #555; margin-top: 5px; display: block; }
+        .percent-text { font-weight: bold; color: #444; font-size: 1.1rem; margin-top: 5px; display: block; }
 
-        /* Tasti Extra (Amazon & Test) */
+        /* Tasti Extra */
         .amazon-link {
             position: fixed; bottom: 25px; right: 25px; font-size: 2.2rem;
             text-decoration: none; background: white; padding: 12px; border-radius: 50%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s;
-            display: flex; justify-content: center; align-items: center;
+            display: flex; justify-content: center; align-items: center; z-index: 50;
         }
         .amazon-link:hover { transform: scale(1.1); }
         
         .debug-btn {
-            position: fixed; bottom: 20px; left: 20px; opacity: 0.1; /* Quasi invisibile */
-            background: #333; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer;
+            position: fixed; bottom: 20px; left: 20px; opacity: 0.1;
+            background: #333; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; z-index: 50;
         }
 
         /* Schermata Reveal Finale */
-        #reveal-ui { display: none; width: 100%; text-align: center; position: absolute; top: 15%; left: 0; right: 0; }
+        #reveal-ui { display: none; width: 100%; text-align: center; position: absolute; top: 10%; left: 0; right: 0; }
+        
+        /* CORREZIONE NOME */
         #reveal-name {
-            font-family: 'SaintOmbre', serif; font-size: 5.5rem; color: white;
-            opacity: 0; margin-top: -80px; transition: opacity 2s ease-in;
-            text-shadow: 2px 4px 15px rgba(0,0,0,0.2);
+            font-family: 'SaintOmbre', serif; 
+            font-size: 6rem; 
+            color: #ffffff; /* Bianco per risaltare sull'azzurro */
+            opacity: 0; 
+            margin-top: -60px; 
+            transition: opacity 1.5s ease-in;
+            text-shadow: 2px 4px 15px rgba(0,0,0,0.3); /* Ombra per renderlo visibile ovunque */
+            position: relative; /* Fondamentale per z-index */
+            z-index: 999; /* Lo spinge sopra l'animazione Lottie */
+            display: block;
+        }
+        
+        #lottie-pacco {
+            position: relative; z-index: 1; /* Tiene il pacco dietro il nome */
         }
     </style>
 </head>
 <body>
 
     <div id="welcome-overlay">
-        <h1 style="padding: 20px; color: #333;">Scopri se sarà<br>Gabriel o Victoria</h1>
-        <button class="btn-voto" style="background:#333; width:auto; padding: 15px 40px;" onclick="startApp()">SCOPRI</button>
+        <div class="welcome-box">
+            <h1 style="margin-top: 0; color: #333;">Scopri se sarà<br>Gabriel o Victoria</h1>
+            <button class="btn-voto btn-start" onclick="startApp()">SCOPRI</button>
+        </div>
     </div>
 
     <div class="split-bg" id="main-bg">
@@ -125,12 +152,12 @@
             
             <div class="btns-container">
                 <div class="vote-card">
-                    <button class="btn-voto btn-gabriel" onclick="vota('gabriel')">GABRIEL</button>
+                    <button id="btn-gabriel" class="btn-voto btn-gabriel" onclick="vota('gabriel')">GABRIEL</button>
                     <div class="progress-container"><div id="bar-gabriel" class="progress-bar bar-blue"></div></div>
                     <small id="percent-gabriel" class="percent-text">0%</small>
                 </div>
                 <div class="vote-card">
-                    <button class="btn-voto btn-victoria" onclick="vota('victoria')">VICTORIA</button>
+                    <button id="btn-victoria" class="btn-voto btn-victoria" onclick="vota('victoria')">VICTORIA</button>
                     <div class="progress-container"><div id="bar-victoria" class="progress-bar bar-pink"></div></div>
                     <small id="percent-victoria" class="percent-text">0%</small>
                 </div>
@@ -139,18 +166,17 @@
     </div>
 
     <div id="reveal-ui">
-        <div id="lottie-pacco" style="width: 100%; max-width: 500px; margin: 0 auto;"></div>
+        <div id="lottie-pacco" style="width: 100%; max-width: 450px; margin: 0 auto;"></div>
         <h1 id="reveal-name">GABRIEL</h1>
     </div>
 
-    <a href="https://www.amazon.it/baby-reg/benedetta-parmesan-ottobre-2026-venezia/1MJ3B3ETJ2BFC" target="_blank" class="amazon-link">🎁</a>
+    <a href="https://www.amazon.it/baby-reg" target="_blank" class="amazon-link">🎁</a>
     <button class="debug-btn" onclick="triggerTest()">Test 10s</button>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getFirestore, doc, onSnapshot, updateDoc, increment, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-        // Configurazione Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBbJ06QOQQXPBfQ9rJtWJonV1ce6aeAZM0",
             authDomain: "gender-reveal-cosimo.firebaseapp.com",
@@ -163,15 +189,44 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        // Data del Reveal (Maggio 2, 2026 18:00 ora locale IT)
         let targetTime = new Date("2026-05-02T18:00:00+02:00").getTime();
         let isRevealed = false;
 
-        // Gestione Voti in Tempo Reale
+        // --- SISTEMA DI VOTO CON BLOCCO ---
+        // Controlla se l'utente ha già votato in precedenza
+        function controllaStatoVoto() {
+            if (localStorage.getItem("voto_registrato")) {
+                document.getElementById("btn-gabriel").disabled = true;
+                document.getElementById("btn-victoria").disabled = true;
+                document.getElementById("btn-gabriel").style.opacity = "0.6";
+                document.getElementById("btn-victoria").style.opacity = "0.6";
+            }
+        }
+
+        window.vota = async (scelta) => {
+            // Verifica Limite
+            if (localStorage.getItem("voto_registrato")) {
+                alert("Hai già espresso il tuo voto! Attendi il risultato ⏳");
+                return;
+            }
+
+            // Segna il voto come effettuato sul dispositivo
+            localStorage.setItem("voto_registrato", "true");
+            controllaStatoVoto();
+
+            const btn = document.getElementById(`btn-${scelta}`);
+            btn.innerText = "VOTATO ✔";
+            btn.style.opacity = "1"; // Mantiene acceso quello scelto
+
+            // Invia a Firebase
+            await updateDoc(doc(db, "votes", "summary"), { [scelta]: increment(1) });
+        };
+
+        // --- LETTURA VOTI IN TEMPO REALE ---
         onSnapshot(doc(db, "votes", "summary"), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                const total = (data.gabriel || 0) + (data.victoria || 0) || 1; // Evita divisione per zero
+                const total = (data.gabriel || 0) + (data.victoria || 0) || 1; 
                 const pG = Math.round(((data.gabriel || 0) / total) * 100);
                 const pV = 100 - pG;
                 
@@ -182,17 +237,7 @@
             }
         });
 
-        // Funzione di Voto
-        window.vota = async (scelta) => {
-            const btn = document.querySelector(`.btn-${scelta}`);
-            const originalText = btn.innerText;
-            btn.innerText = "VOTATO ✔";
-            setTimeout(() => btn.innerText = originalText, 1500);
-            
-            await updateDoc(doc(db, "votes", "summary"), { [scelta]: increment(1) });
-        };
-
-        // Gestione Countdown
+        // --- COUNTDOWN ---
         const timerLoop = setInterval(() => {
             const now = new Date().getTime();
             const diff = targetTime - now;
@@ -213,39 +258,34 @@
 
             let html = "";
             if (d > 0) {
-                html = `${d}g : ${h}o : ${m}m : ${s}s`;
+                html = `<div><span>${d}</span><small>giorni</small></div>:<div><span>${h}</span><small>ore</small></div>:<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
             } else if (h > 0) {
-                html = `${h}o : ${m}m : ${s}s`;
+                html = `<div><span>${h}</span><small>ore</small></div>:<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
             } else if (m > 0) {
-                html = `${m}m : ${s}s`;
+                html = `<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
             } else {
-                // Meno di un minuto: mostra solo i secondi giganti
                 const el = document.getElementById('timer-val');
                 el.className = "timer-big";
                 el.innerText = s;
                 
-                // Vibrazione automatica negli ultimi 5 secondi
                 if (s <= 5 && s > 0 && navigator.vibrate) {
-                    navigator.vibrate(200);
+                    navigator.vibrate(300);
                 }
                 return;
             }
-            document.getElementById('timer-val').innerText = html;
+            document.getElementById('timer-val').innerHTML = html;
         }
 
-        // Funzione Reveal Finale
+        // --- REVEAL FINALE ---
         function doReveal() {
             isRevealed = true;
             
-            // Nasconde UI e mostra l'animazione
             document.getElementById('content-ui').style.display = 'none';
             document.getElementById('reveal-ui').style.display = 'block';
             
-            // Animazione Sfondo: Il rosa scompare, l'azzurro riempie tutto e diventa più scuro
             document.getElementById('bg-pink').style.flex = "0";
             document.getElementById('bg-blue').style.background = "#4a90e2";
 
-            // Avvia Pacco Lottie
             bodymovin.loadAnimation({
                 container: document.getElementById('lottie-pacco'),
                 path: 'Register User.json',
@@ -254,25 +294,26 @@
                 autoplay: true
             });
 
-            // Apparizione Nome + Coriandoli
+            // Mostra il nome dopo 1.5 secondi (anticipato per vederlo sbucare dal pacco)
             setTimeout(() => {
-                document.getElementById('reveal-name').classList.add('visible');
+                const nameTag = document.getElementById('reveal-name');
+                nameTag.style.opacity = "1";
                 
-                // Coriandoli azzurri extra su sfondo azzurro
                 confetti({ 
-                    particleCount: 250, 
-                    spread: 90, 
+                    particleCount: 300, 
+                    spread: 100, 
                     origin: { y: 0.6 }, 
-                    colors: ['#ffffff', '#89CFF0', '#007bff'] 
+                    colors: ['#ffffff', '#89CFF0', '#007bff'],
+                    zIndex: 2000
                 });
-            }, 2000); // Calibrato per apparire quando il pacco si apre
+            }, 1500); 
         }
 
-        // Inizializzazione al click di Benvenuto
+        // --- AVVIO APP ---
         window.startApp = async () => {
             document.getElementById('welcome-overlay').style.display = 'none';
+            controllaStatoVoto(); // Disattiva i bottoni se aveva già votato
             
-            // Crea il database voti se non esiste
             const ref = doc(db, "votes", "summary");
             const snap = await getDoc(ref);
             if (!snap.exists()) {
@@ -280,7 +321,6 @@
             }
         };
 
-        // Funzione di Debug (Simula che manchino 10 secondi)
         window.triggerTest = () => {
             targetTime = new Date().getTime() + 11000;
         };
