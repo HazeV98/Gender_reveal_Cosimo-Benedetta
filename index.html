@@ -16,10 +16,11 @@
         }
 
         :root {
-            --blue: #d0e9f8;
-            --pink: #f8d0e3;
-            --blue-dark: #89CFF0;
-            --pink-dark: #F4C2C2;
+            /* Colori pastello intensificati per far risaltare il bianco */
+            --blue: #a2d2ff;
+            --pink: #ffc8dd;
+            --blue-dark: #74b9ff;
+            --pink-dark: #ffafcc;
         }
 
         body, html { 
@@ -28,7 +29,7 @@
             overflow-x: hidden; 
         }
 
-        /* Sfondo Split Dinamico */
+        /* Sfondo Split */
         .split-bg {
             position: fixed; inset: 0; display: flex; z-index: -1;
             transition: all 1s ease-in-out;
@@ -36,44 +37,44 @@
         .bg-left { flex: 1; background: var(--blue); transition: flex 1s ease-in-out, background 1s; }
         .bg-right { flex: 1; background: var(--pink); transition: flex 1s ease-in-out; }
 
-        /* Schermata Iniziale (Effetto Vetro) */
+        /* Schermata Iniziale */
         #welcome-overlay {
             position: fixed; inset: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
         .welcome-box {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* Timer UI BIANCO e INGRANDITO */
+        /* Timer UI BIANCO */
         #timer-container {
             margin-top: 30px; min-height: 120px;
             display: flex; justify-content: center; align-items: center;
         }
         .timer-big { 
             font-size: 8rem; color: #ffffff; line-height: 1; font-weight: bold;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3); 
         }
         .timer-normal { 
             font-size: 2.8rem; display: flex; gap: 15px; justify-content: center; 
-            color: #ffffff; text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            color: #ffffff; text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .timer-normal span { font-weight: 900; }
         .timer-normal small { 
-            font-size: 1rem; display: block; color: rgba(255, 255, 255, 0.9); 
-            text-transform: uppercase; font-weight: bold; text-shadow: none;
+            font-size: 1rem; display: block; color: #ffffff; 
+            text-transform: uppercase; font-weight: bold; opacity: 0.9;
         }
 
         /* Sezione Voti */
         .vote-section { padding: 15px; text-align: center; margin-top: 10px; }
         .vote-title {
             background: rgba(255,255,255,0.95); display: inline-block; 
-            padding: 10px 25px; border-radius: 20px; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 10px 25px; border-radius: 20px; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             font-weight: bold;
         }
         
@@ -84,39 +85,38 @@
         .btn-voto {
             width: 100%; padding: 20px 10px; border: none; border-radius: 15px;
             font-size: 1.3rem; font-weight: bold; color: white; cursor: pointer;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); transition: all 0.2s;
         }
         .btn-voto:active { transform: scale(0.95); }
-        .btn-voto:disabled { cursor: not-allowed; }
-        .btn-gabriel { background: var(--blue-dark); }
-        .btn-victoria { background: var(--pink-dark); }
+        .btn-gabriel { background: var(--blue-dark); color: white; }
+        .btn-victoria { background: var(--pink-dark); color: white; }
         .btn-start { background: #333; width: auto; padding: 15px 40px; }
 
         /* Barre di Progresso */
         .progress-container { 
             background: rgba(255,255,255,0.8); border-radius: 10px; 
-            margin-top: 15px; height: 14px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 15px; height: 16px; overflow: hidden; box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
         }
         .progress-bar { height: 100%; width: 50%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bar-blue { background: #4a90e2; }
-        .bar-pink { background: #e24a90; }
-        .percent-text { font-weight: bold; color: #444; font-size: 1.1rem; margin-top: 5px; display: block; background: rgba(255,255,255,0.6); border-radius: 5px; padding: 2px;}
+        .bar-blue { background: #4895ef; }
+        .bar-pink { background: #f72585; }
+        .percent-text { font-weight: bold; color: #333; font-size: 1.2rem; margin-top: 5px; display: block; }
 
-        /* Tasti Extra */
+        /* Tasto Lista Nascita Amazon */
         .amazon-link {
             position: fixed; bottom: 25px; right: 25px; font-size: 2.2rem;
             text-decoration: none; background: white; padding: 12px; border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.2s;
             display: flex; justify-content: center; align-items: center; z-index: 50;
         }
         .amazon-link:hover { transform: scale(1.1); }
         
         .debug-btn {
-            position: fixed; bottom: 20px; left: 20px; opacity: 0.1;
+            position: fixed; bottom: 20px; left: 20px; opacity: 0.05;
             background: #333; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; z-index: 50;
         }
 
-        /* Schermata Reveal Finale */
+        /* Reveal Finale */
         #reveal-ui { display: none; width: 100%; text-align: center; position: absolute; top: 10%; left: 0; right: 0; }
         
         #reveal-name {
@@ -124,9 +124,9 @@
             font-size: 6.5rem; 
             color: #ffffff; 
             opacity: 0; 
-            margin-top: -250px; /* Più alto rispetto al pacco */
+            margin-top: -250px; /* Altezza ottimizzata */
             transition: opacity 1.5s ease-in;
-            text-shadow: 2px 4px 15px rgba(0,0,0,0.3); 
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.4); 
             position: relative; 
             z-index: 999; 
             display: block;
@@ -151,7 +151,7 @@
 
     <div id="content-ui">
         <div id="timer-container">
-            <div id="timer-val" class="timer-normal">Calcolo tempo...</div>
+            <div id="timer-val" class="timer-normal">Caricamento...</div>
         </div>
 
         <div class="vote-section">
@@ -178,6 +178,7 @@
     </div>
 
     <a href="https://www.amazon.it/baby-reg/benedetta-parmesan-ottobre-2026-venezia/1MJ3B3ETJ2BFC" target="_blank" class="amazon-link">🎁</a>
+    
     <button class="debug-btn" onclick="triggerTest()">Test 10s</button>
 
     <script type="module">
@@ -203,59 +204,44 @@
             if (localStorage.getItem("voto_registrato")) {
                 document.getElementById("btn-gabriel").disabled = true;
                 document.getElementById("btn-victoria").disabled = true;
-                document.getElementById("btn-gabriel").style.opacity = "0.6";
-                document.getElementById("btn-victoria").style.opacity = "0.6";
+                document.getElementById("btn-gabriel").style.opacity = "0.5";
+                document.getElementById("btn-victoria").style.opacity = "0.5";
             }
         }
 
         window.vota = async (scelta) => {
             if (localStorage.getItem("voto_registrato")) {
-                alert("Hai già espresso il tuo voto! Attendi il risultato ⏳");
+                alert("Hai già espresso il tuo voto! ⏳");
                 return;
             }
-
             localStorage.setItem("voto_registrato", "true");
             controllaStatoVoto();
-
-            const btn = document.getElementById(`btn-${scelta}`);
-            btn.innerText = "VOTATO ✔";
-            btn.style.opacity = "1";
-
+            document.getElementById(`btn-${scelta}`).innerText = "VOTATO ✔";
+            document.getElementById(`btn-${scelta}`).style.opacity = "1";
             await updateDoc(doc(db, "votes", "summary"), { [scelta]: increment(1) });
         };
 
-        // BUG FIX: Gestione corretta dei voti a ZERO
         onSnapshot(doc(db, "votes", "summary"), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                const gabrielVotes = data.gabriel || 0;
-                const victoriaVotes = data.victoria || 0;
-                const total = gabrielVotes + victoriaVotes;
-                
-                let pG = 50; // Default metà e metà se nessuno ha votato
-                let pV = 50;
-                let textG = "0%";
-                let textV = "0%";
-
+                const gV = data.gabriel || 0;
+                const vV = data.victoria || 0;
+                const total = gV + vV;
+                let pG = 50, pV = 50, tG = "0%", tV = "0%";
                 if (total > 0) {
-                    pG = Math.round((gabrielVotes / total) * 100);
+                    pG = Math.round((gV / total) * 100);
                     pV = 100 - pG;
-                    textG = pG + "%";
-                    textV = pV + "%";
+                    tG = pG + "%"; tV = pV + "%";
                 }
-                
                 document.getElementById('bar-gabriel').style.width = pG + '%';
                 document.getElementById('bar-victoria').style.width = pV + '%';
-                document.getElementById('percent-gabriel').innerText = textG;
-                document.getElementById('percent-victoria').innerText = textV;
+                document.getElementById('percent-gabriel').innerText = tG;
+                document.getElementById('percent-victoria').innerText = tV;
             }
         });
 
-        // --- COUNTDOWN ---
         const timerLoop = setInterval(() => {
-            const now = new Date().getTime();
-            const diff = targetTime - now;
-            
+            const diff = targetTime - new Date().getTime();
             if (diff <= 0 && !isRevealed) {
                 clearInterval(timerLoop);
                 doReveal();
@@ -265,79 +251,51 @@
         }, 1000);
 
         function updateTimerUI(diff) {
-            const d = Math.floor(diff / 864e5);
-            const h = Math.floor((diff % 864e5) / 36e5);
-            const m = Math.floor((diff % 36e5) / 6e4);
-            const s = Math.floor((diff % 6e4) / 1000);
-
-            let html = "";
-            if (d > 0) {
-                html = `<div><span>${d}</span><small>giorni</small></div>:<div><span>${h}</span><small>ore</small></div>:<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
-            } else if (h > 0) {
-                html = `<div><span>${h}</span><small>ore</small></div>:<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
-            } else if (m > 0) {
-                html = `<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
-            } else {
+            const d = Math.floor(diff / 864e5), h = Math.floor((diff % 864e5) / 36e5), m = Math.floor((diff % 36e5) / 6e4), s = Math.floor((diff % 6e4) / 1000);
+            if (d <= 0 && h <= 0 && m <= 0) {
                 const el = document.getElementById('timer-val');
-                el.className = "timer-big";
-                el.innerText = s;
-                
-                if (s <= 5 && s > 0 && navigator.vibrate) {
-                    navigator.vibrate(300);
-                }
-                return;
+                el.className = "timer-big"; el.innerText = s;
+                if (s <= 5 && s > 0 && navigator.vibrate) navigator.vibrate(300);
+            } else {
+                let html = "";
+                if (d > 0) html += `<div><span>${d}</span><small>giorni</small></div>:`;
+                if (h > 0 || d > 0) html += `<div><span>${h}</span><small>ore</small></div>:`;
+                html += `<div><span>${m}</span><small>min</small></div>:<div><span>${s}</span><small>sec</small></div>`;
+                document.getElementById('timer-val').innerHTML = html;
             }
-            document.getElementById('timer-val').innerHTML = html;
         }
 
-        // --- REVEAL FINALE ---
         function doReveal() {
             isRevealed = true;
-            
             document.getElementById('content-ui').style.display = 'none';
             document.getElementById('reveal-ui').style.display = 'block';
-            
             document.getElementById('bg-pink').style.flex = "0";
             document.getElementById('bg-blue').style.background = "#4a90e2";
 
             bodymovin.loadAnimation({
                 container: document.getElementById('lottie-pacco'),
                 path: 'Register User.json',
-                renderer: 'svg', 
-                loop: false, 
-                autoplay: true
+                renderer: 'svg', loop: false, autoplay: true
             });
 
-            // TIMING AGGIORNATO: appare dopo 2.5 secondi
             setTimeout(() => {
-                const nameTag = document.getElementById('reveal-name');
-                nameTag.style.opacity = "1";
-                
+                document.getElementById('reveal-name').style.opacity = "1";
                 confetti({ 
-                    particleCount: 300, 
-                    spread: 100, 
-                    origin: { y: 0.6 }, 
-                    colors: ['#ffffff', '#89CFF0', '#007bff'],
-                    zIndex: 2000
+                    particleCount: 350, spread: 120, origin: { y: 0.6 }, 
+                    colors: ['#ffffff', '#89CFF0', '#007bff'], zIndex: 2000
                 });
             }, 2500); 
         }
 
-        // --- AVVIO APP ---
         window.startApp = async () => {
             document.getElementById('welcome-overlay').style.display = 'none';
             controllaStatoVoto();
-            
             const ref = doc(db, "votes", "summary");
             const snap = await getDoc(ref);
-            if (!snap.exists()) {
-                await setDoc(ref, { gabriel: 0, victoria: 0 });
-            }
+            if (!snap.exists()) await setDoc(ref, { gabriel: 0, victoria: 0 });
         };
 
-        window.triggerTest = () => {
-            targetTime = new Date().getTime() + 11000;
-        };
+        window.triggerTest = () => { targetTime = new Date().getTime() + 11000; };
     </script>
 </body>
 </html>
