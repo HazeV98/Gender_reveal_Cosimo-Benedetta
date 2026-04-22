@@ -16,10 +16,8 @@
         }
 
         :root {
-            /* Sfondi pastello per lo schermo intero */
-            --blue: #a2d2ff;
-            --pink: #ffc8dd;
-            /* Colori molto più intensi per i bottoni per far risaltare il bianco */
+            var(--blue): #a2d2ff;
+            var(--pink): #ffc8dd;
             --blue-dark: #4895ef; 
             --pink-dark: #f72585; 
         }
@@ -35,8 +33,8 @@
             position: fixed; inset: 0; display: flex; z-index: -1;
             transition: all 1s ease-in-out;
         }
-        .bg-left { flex: 1; background: var(--blue); transition: flex 1s ease-in-out, background 1s; }
-        .bg-right { flex: 1; background: var(--pink); transition: flex 1s ease-in-out; }
+        .bg-left { flex: 1; background: #a2d2ff; transition: flex 1s ease-in-out, background 1s; }
+        .bg-right { flex: 1; background: #ffc8dd; transition: flex 1s ease-in-out; }
 
         /* Schermata Iniziale */
         #welcome-overlay {
@@ -84,12 +82,16 @@
         }
         .vote-card { width: 45%; }
         
-        /* BOTTONI AGGIORNATI PER FAR RISALTARE IL BIANCO */
+        /* FIX BIANCO PURO SUI BOTTONI */
         .btn-voto {
             width: 100%; padding: 20px 10px; border: none; border-radius: 15px;
             font-size: 1.4rem; font-weight: 900; letter-spacing: 1px;
-            color: #ffffff; /* Testo forzatamente bianco */
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Ombra per staccare il testo dallo sfondo */
+            
+            /* Forzatura estrema per il testo bianco ovunque */
+            color: #ffffff !important; 
+            -webkit-text-fill-color: #ffffff !important; 
+            
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4); 
             cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); transition: all 0.2s;
         }
@@ -97,7 +99,11 @@
         .btn-gabriel { background: var(--blue-dark); }
         .btn-victoria { background: var(--pink-dark); }
         
-        .btn-start { background: #333; color: white; width: auto; padding: 15px 40px; text-shadow: none; font-size: 1.2rem; }
+        .btn-start { 
+            background: #333; 
+            width: auto; padding: 15px 40px; 
+            text-shadow: none; font-size: 1.2rem; 
+        }
 
         /* Barre di Progresso */
         .progress-container { 
@@ -120,7 +126,7 @@
         
         .debug-btn {
             position: fixed; bottom: 20px; left: 20px; opacity: 0.05;
-            background: #333; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; z-index: 50;
+            background: #333; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; border: none; padding: 10px; border-radius: 8px; cursor: pointer; z-index: 50;
         }
 
         /* Reveal Finale */
@@ -129,7 +135,8 @@
         #reveal-name {
             font-family: 'SaintOmbre', serif; 
             font-size: 6.5rem; 
-            color: #ffffff; 
+            color: #ffffff !important; 
+            -webkit-text-fill-color: #ffffff !important;
             opacity: 0; 
             margin-top: -250px; 
             transition: opacity 1.5s ease-in;
@@ -277,8 +284,6 @@
             document.getElementById('content-ui').style.display = 'none';
             document.getElementById('reveal-ui').style.display = 'block';
             document.getElementById('bg-pink').style.flex = "0";
-            
-            // Colore finale più azzurro intenso che si ricollega al bottone
             document.getElementById('bg-blue').style.background = "#4895ef";
 
             bodymovin.loadAnimation({
